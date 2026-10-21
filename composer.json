@@ -1,0 +1,7 @@
+{
+    "name": "dieselgarcia/ecommerce",
+    "type": "project",
+    "require": {
+        "phpmailer/phpmailer": "^7.1"
+    }
+}

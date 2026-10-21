@@ -1,0 +1,253 @@
+@import "tailwindcss";
+@source "../../views"; /* Tailwind escaneará tus plantillas PHP buscando clases */
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * dieselgarcia.com design system
+ * Azul marino profundo (primary) + amarillo industrial (accent/CTA)
+ * Todos los colores en oklch. Nunca usar colores literales en componentes.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-deep: var(--primary-deep);
+  --color-primary-glow: var(--primary-glow);
+  
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent-hover: var(--accent-hover);
+  
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  
+  --font-display: "Barlow Condensed", "Arial Narrow", sans-serif;
+  --font-sans: "Barlow", system-ui, sans-serif;
+  
+  --shadow-soft: 0 2px 8px -2px oklch(0.25 0.06 258 / 0.12);
+  --shadow-card: 0 10px 30px -12px oklch(0.25 0.06 258 / 0.22);
+  --shadow-cta: 0 8px 22px -8px oklch(0.86 0.18 96 / 0.65);
+}
+
+:root {
+  --radius: 0.875rem;
+
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.24 0.03 258);
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.24 0.03 258);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.24 0.03 258);
+
+  /* Azul marino profundo */
+  --primary: oklch(0.35 0.13 262);
+  --primary-foreground: oklch(0.99 0.005 250);
+  --primary-deep: oklch(0.24 0.09 264);
+  --primary-glow: oklch(0.55 0.18 258);
+
+  /* Amarillo industrial (CTA) */
+  --accent: oklch(0.87 0.18 95);
+  --accent-foreground: oklch(0.23 0.06 262);
+  --accent-hover: oklch(0.92 0.19 100);
+
+  --secondary: oklch(0.96 0.008 258);
+  --secondary-foreground: oklch(0.3 0.05 262);
+  --muted: oklch(0.965 0.006 258);
+  --muted-foreground: oklch(0.52 0.02 258);
+
+  --destructive: oklch(0.58 0.22 25);
+  --destructive-foreground: oklch(0.99 0.005 250);
+  --success: oklch(0.62 0.15 152);
+
+  --border: oklch(0.91 0.01 258);
+  --input: oklch(0.91 0.01 258);
+  --ring: oklch(0.55 0.18 258);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+    text-transform: none;
+  }
+}
+
+/* ---------- Utilidades del sistema de diseño ---------- */
+
+@utility surface-card {
+  background-color: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-soft);
+  transition: box-shadow 0.35s ease, transform 0.35s ease;
+
+  &:hover {
+    box-shadow: var(--shadow-card);
+    transform: translateY(-4px);
+  }
+}
+
+@utility btn-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.0625rem;
+  letter-spacing: 0.02em;
+  padding: 0.7rem 1.6rem;
+  transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.25s ease, color 0.2s ease;
+  cursor: pointer;
+
+  &:active {
+    transform: scale(0.97);
+  }
+}
+
+@utility btn-cta {
+  background-color: var(--color-accent);
+  color: var(--color-accent-foreground);
+  box-shadow: var(--shadow-cta);
+
+  &:hover {
+    background-color: var(--color-accent-hover);
+    transform: translateY(-2px) scale(1.02);
+  }
+}
+
+@utility btn-primary {
+  background-color: var(--color-primary);
+  color: var(--color-primary-foreground);
+
+  &:hover {
+    background-color: var(--color-primary-deep);
+    transform: translateY(-2px);
+  }
+}
+
+@utility btn-outline {
+  background-color: transparent;
+  color: var(--color-primary);
+  border: 1.5px solid var(--color-primary);
+
+  &:hover {
+    background-color: var(--color-primary);
+    color: var(--color-primary-foreground);
+  }
+}
+
+@utility btn-ghost-light {
+  background-color: color-mix(in oklab, var(--color-primary-foreground) 12%, transparent);
+  color: var(--color-primary-foreground);
+  border: 1.5px solid color-mix(in oklab, var(--color-primary-foreground) 45%, transparent);
+
+  &:hover {
+    background-color: color-mix(in oklab, var(--color-primary-foreground) 22%, transparent);
+  }
+}
+
+@utility field-input {
+  width: 100%;
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--color-input);
+  background-color: var(--color-card);
+  padding: 0.7rem 0.95rem;
+  font-size: 0.95rem;
+  color: var(--color-foreground);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+  &::placeholder {
+    color: var(--color-muted-foreground);
+  }
+
+  &:focus {
+    outline: none;
+    border-color: var(--color-primary-glow);
+    box-shadow: 0 0 0 4px color-mix(in oklab, var(--color-primary-glow) 18%, transparent);
+  }
+}
+
+@utility badge-offer {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 9999px;
+  background-color: var(--color-accent);
+  color: var(--color-accent-foreground);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.7rem;
+}
+
+@utility gradient-hero {
+  background-image: linear-gradient(
+    120deg,
+    var(--color-primary-deep) 0%,
+    var(--color-primary) 55%,
+    var(--color-primary-glow) 100%
+  );
+}
+
+@utility zoom-media {
+  overflow: hidden;
+
+  & img {
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  &:hover img {
+    transform: scale(1.08);
+  }
+}
+
+@utility reveal-hidden {
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+@utility reveal-shown {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
